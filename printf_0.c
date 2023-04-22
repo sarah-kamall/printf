@@ -51,26 +51,24 @@ int switches(va_list args,char c, size_t *size)
 			if (str)
 			{
 				write(1, str, sizeof(str));
-				size += sizeof(str);
+				*size += sizeof(str);
 				return (2);
 			}
 			break;
 		case 'c':
 			x = va_arg(args, int);
 			write(1, &x, 1);
-			size += 1;
+			*size += 1;
 			return (2);
 			break;
 		case 'i':
 			x = va_arg(args, int);
-			write(1, &x, count_chars(x));
-			size += count_chars(x);
+			write(1, &x, sizeof(x));
+			*size += count_chars(x);
 			return (2);
 		default:
 			write(1, &c, 1);
-			size += 1;
+			*size += 1;
 			return (1);
 	}
 }
-
-
