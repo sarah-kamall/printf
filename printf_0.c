@@ -1,5 +1,5 @@
 #include"main.h"
-int switches(va_list args,char c, size_t *size, char **s);
+int switches(va_list args,char c, size_t *size);
 int count_chars(int num) {
     int count = 0;
     while(num != 0) {
@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 	const char *s;
 	size_t size;
 	va_list(args);
+	int u;
 
 	if (!format)
 		return (-1);
@@ -23,7 +24,11 @@ int _printf(const char *format, ...)
 	{
 		if (*s == '%')
 		{
-			 switches(args, char c, size_t *size, char **s);
+			u = switches(args, *(s + 1), &size);
+			if (u == 2)
+				s += 2;
+			if (u == 1)
+				s += 1;
 		}
 		else
 		{
@@ -35,10 +40,8 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (size);
 }
-int switches(va_list args,char c, size_t *size, char **s)
+int switches(va_list args,char c, size_t *size)
 {
-	va_list args_copy;
-    	va_copy(args_copy, args);
 	char  *str;
 	int x;
 	switch (c)
@@ -49,24 +52,24 @@ int switches(va_list args,char c, size_t *size, char **s)
 			{
 				write(1, str, sizeof(str));
 				size += sizeof(str);
-				s += 2;
+				return (2);
 			}
 			break;
 		case 'c':
 			x = va_arg(args, int);
 			write(1, &x, 1);
 			size += 1;
-			s += 2;
+			return (2);
 			break;
 		case 'i':
 			x = va_arg(args, int);
-			write(1, &x, sizeof(x));
-			size += sizeof(x);
-			s += 2;
+			write(1, &x, count_chars(x));
+			size += count_chars(x);
+			return (2);
 		default:
-			write(1, s, 1);
+			write(1, &c, 1);
 			size += 1;
-			s++;
+			return (1);
 	}
 }
 
