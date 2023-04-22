@@ -1,43 +1,4 @@
 #include"main.h"
-int switches(va_list args,char c, size_t *size);
-int count_chars(int num) {
-    int count = 0;
-    while(num != 0) {
-        num /= 10;
-        count++;
-    }
-    return count;
-}
-char *inttostring(int x) {
-    int sign = x < 0 ? -1 : 1;
-    int length = 0;
-    int tmp = x;
-    char *str;
-    int i;
-
-    while (tmp != 0) {
-        length++;
-        tmp /= 10;
-    }
-    if (sign < 0) {
-        length++;
-    }
-    str = malloc(length + 1);
-    if (str == NULL) {
-        return NULL;
-    }
-    str[length] = '\0';
-    i = length - 1;
-    while (x != 0) {
-        str[i] = abs(x % 10) + '0';
-        x /= 10;
-        i--;
-    }
-    if (sign < 0) {
-        str[0] = '-';
-    }
-    return str;
-}
 int _printf(const char *format, ...)
 {
 	const char *s;
@@ -97,6 +58,12 @@ int switches(va_list args,char c, size_t *size)
 			write(1, str, strlen(str));
 			*size += count_chars(x);
 			return (2);
+		case '%':
+			x = '%';
+			write(1, &x, 1);
+			*size += 1;
+			return (2);
+			break;
 		default:
 			write(1, &c, 1);
 			*size += 1;
