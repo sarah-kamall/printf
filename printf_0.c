@@ -22,16 +22,24 @@ int _printf(const char *format, ...)
 	{
 		if (*s == '%')
 		{
-			u = switches(args, *(s + 1), &size);
-			if (u == 2)
-				s += 2;
-			if (u == 1)
-				s += 1;
-			if (u == -10)
+			if (*(s + 1))
+			{
+				u = switches(args, *(s + 1), &size);
+				if (u == 2)
+					s += 2;
+				if (u == 1)
+					s += 1;
+				if (u == -10)
+				{
+					write(1, s, 1);
+					s++;
+					size += 1;
+				}
+			}
+			else
 			{
 				write(1, s, 1);
-				s++;
-				size += 1;
+				return (size + 1);
 			}
 		}
 		else

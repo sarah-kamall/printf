@@ -7,6 +7,6 @@ int main(void)
 	a = 'H';
 	b = "hello";
 
-	a = _printf("%c, %s\n, % \0", a, b);
+	a = _printf("%c, %s, % %%", a, b);
 	return (0);
 }
