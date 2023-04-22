@@ -27,6 +27,12 @@ int _printf(const char *format, ...)
 				s += 2;
 			if (u == 1)
 				s += 1;
+			if (u == -10)
+			{
+				write(1, s, 1);
+				s++;
+				size += 1;
+			}
 		}
 		else
 		{
@@ -80,6 +86,8 @@ int switches(va_list args,char c, size_t *size)
 			*size += 1;
 			return (2);
 			break;
+		case ' ':
+			return (-10);
 		default:
 			write(1, &c, 1);
 			*size += 1;
