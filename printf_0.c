@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 	size = 0;
 	s = format;
 	va_start(args, format);
-	while (s)
+	while (*s)
 	{
 		if (*s == '%')
 		{
@@ -21,8 +21,8 @@ int _printf(const char *format, ...)
 					str = va_arg(args, char *);
 					if (str)
 					{
-						write(1, str, sizeof(str));
-						size += sizeof(str);
+						write(1, str, strlen(str));
+						size += strlen(str);
 						s += 2;
 					}
 					break;
@@ -31,10 +31,12 @@ int _printf(const char *format, ...)
 					write(1, &c, 1);
 					size += 1;
 					s += 2;
+					break;
 				default:
 					write(1, s, 1);
 					size += 1;
 					s++;
+					break;
 			}
 		}
 		else
