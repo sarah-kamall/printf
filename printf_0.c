@@ -88,6 +88,13 @@ int switches(va_list args,char c, size_t *size)
 			*size += count_chars(x);
 			return (2);
 			break;
+		case 'd':
+			x = va_arg(args, int);
+			str = inttostring(x);
+			write(1, str, strlen(str));
+			*size += count_chars(x);
+			return (2);
+			break;
 		case '%':
 			x = '%';
 			write(1, &x, 1);
