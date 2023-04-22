@@ -15,7 +15,7 @@ int _printf(const char *format, ...)
 	{
 		if (*s == '%')
 		{
-			switch (*s)
+			switch (*(s + 1))
 			{
 				case 's':
 					str = va_arg(args, char *);
@@ -30,7 +30,11 @@ int _printf(const char *format, ...)
 					c = va_arg(args, int);
 					write(1, &c, 1);
 					size += 1;
-					s +=2;
+					s += 2;
+				default:
+					write(1, s, 1);
+					size += 1;
+					s++;
 			}
 		}
 		else
@@ -40,6 +44,7 @@ int _printf(const char *format, ...)
 			size += 1;
 		}
 	}
+	va_end(args);
 	return (size);
 }
 
