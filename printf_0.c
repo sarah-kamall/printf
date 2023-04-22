@@ -8,6 +8,36 @@ int count_chars(int num) {
     }
     return count;
 }
+char *inttostring(int x) {
+    int sign = x < 0 ? -1 : 1;
+    int length = 0;
+    int tmp = x;
+    char *str;
+    int i;
+
+    while (tmp != 0) {
+        length++;
+        tmp /= 10;
+    }
+    if (sign < 0) {
+        length++;
+    }
+    str = malloc(length + 1);
+    if (str == NULL) {
+        return NULL;
+    }
+    str[length] = '\0';
+    i = length - 1;
+    while (x != 0) {
+        str[i] = abs(x % 10) + '0';
+        x /= 10;
+        i--;
+    }
+    if (sign < 0) {
+        str[0] = '-';
+    }
+    return str;
+}
 int _printf(const char *format, ...)
 {
 	const char *s;
@@ -50,8 +80,8 @@ int switches(va_list args,char c, size_t *size)
 			str = va_arg(args, char *);
 			if (str)
 			{
-				write(1, str, sizeof(str));
-				*size += sizeof(str);
+				write(1, str, strlen(str));
+				*size += strlen(str);
 				return (2);
 			}
 			break;
@@ -63,7 +93,8 @@ int switches(va_list args,char c, size_t *size)
 			break;
 		case 'i':
 			x = va_arg(args, int);
-			write(1, &x, sizeof(x));
+			str = inttostring(x);
+			write(1, str, strlen(str));
 			*size += count_chars(x);
 			return (2);
 		default:
@@ -71,4 +102,5 @@ int switches(va_list args,char c, size_t *size)
 			*size += 1;
 			return (1);
 	}
+	return (0);
 }
