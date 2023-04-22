@@ -29,7 +29,7 @@ char *inttostring(int x)
 	int i;
 
 	length = 0;
-	temp = x;
+	tmp = x;
 	sign = x < 0 ? -1 : 1;
     while (tmp != 0) {
         length++;
