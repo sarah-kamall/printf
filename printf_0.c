@@ -1,7 +1,8 @@
 #include"main.h"
 int _printf(const char *format, ...)
 {
-	char *s, *str;
+	char *str;
+	const char *s;
 	size_t size;
 	char c;
 	va_list(args);
