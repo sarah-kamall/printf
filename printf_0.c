@@ -103,14 +103,13 @@ int switches(va_list args, char c, size_t *size)
 			*size += 1;
 			num = 2;
 			break;
-		case ' ':
-			return (-10);
 		default:
-			write(1, "%", 1);
+			x = '%';
+			write(1, &x, 1); 
 			write(1, &c, 1);
 			*size += 2;
 			num = 2;
 			break;
 	}
-	return (num);
+			return (num);
 }
