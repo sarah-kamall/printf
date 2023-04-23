@@ -82,6 +82,14 @@ int switches(va_list args, char c, size_t *size)
 			*size += count_chars(x);
 			num = 2;
 			break;
+		case 'd':
+			x = va_arg(args, int);
+			str = inttostring(x);
+			write(1, str, strlen(str));
+			*size += count_chars(x);
+			num = 2;
+			break;
+			
 		case '%':
 			x = '%';
 			write(1, &x, 1);
@@ -93,7 +101,7 @@ int switches(va_list args, char c, size_t *size)
 		default:
 			write(1, "%", 1);
 			write(1, &c, 1);
-			*size += 1;
+			*size += 2;
 			num = 2;
 			break;
 	}
