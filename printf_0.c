@@ -38,8 +38,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				write(1, s, 1);
-				return (size + 1);
+				return (-1);
 			}
 		}
 		else
