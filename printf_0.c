@@ -24,6 +24,12 @@ int _printf(const char *format, ...)
 		{
 			if (*(s + 1))
 			{
+				while (*(s + 1) && *(s + 1) == ' ')
+				{
+					write(1, (s + 1), 1);
+					size += 1;
+					s++;
+				}
 				u = switches(args, *(s + 1), &size);
 				if (u == 2)
 					s += 2;
