@@ -53,24 +53,27 @@ int print_prec(size_t *size, __attribute__((unused))va_list arg)
 }
 int print_dec(size_t *size, va_list arg)
 {
-	char *binary[];
 	int num;
+	int binary[64];
+	int i;
+	int len;
 
-	num = va_args(arg, int);
+	num = va_arg(arg, unsigned int);
 
-	if (num <= 0)
-	{
-		binary[] = "0";
-	}
-	else
-	{
-		int i;
-		
-		i = 0;
-		for ( ;num > 0; )
+		for (i = 0 ;num > 0; i++)
 		{
-			binaryNum[i++] = num % 2;
+			binary[i] = num % 2;
 			num /= 2;
+			len++;
 		}
-	}
+		for (i = len - 1; i >= 0; i--)
+		{
+			char z;
+
+			z = binary[i] + '0';
+			write(1, &z, 1);
+			*size += 1;
+		}
+	
+		return (2);
 }

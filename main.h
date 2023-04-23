@@ -31,6 +31,6 @@ int print_string(size_t *size, va_list arg);
 int print_char(size_t *size, va_list arg);
 int print_int(size_t *size, va_list arg);
 int print_prec(size_t *size, va_list arg);
-
+int print_dec(size_t *size, va_list arg);
 
 #endif
