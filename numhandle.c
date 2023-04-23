@@ -20,6 +20,25 @@ int count_chars(int num)
 	return (count);
 }
 /**
+ * checkifoct - Checks if an integer is an octal number.
+ *
+ * @num: The integer to check.
+ *
+ * Return: 1 if the integer is an octal number, 0 otherwise.
+ */
+int checkifoct(int num)
+{
+	char *str;
+
+	str = inttostring(num);
+	if (num < 0)
+		return 0;
+	if (*str && *str == '0')
+		return (1);
+	else
+		return (0);
+}
+/**
  * inttostring - convert an integer to a string
  * @x: the integer to convert
  *
@@ -64,4 +83,23 @@ char *inttostring(int x)
 		str[0] = '-';
 	}
 	return (str);
+}
+/**
+ * dec2oct - Converts an integer to its octal representation.
+ *
+ * @num: The integer to convert.
+ *
+ * Return: The octal representation of the integer.
+ */
+int dec2oct(int num)
+{
+    int oct = 0, digit = 1;
+
+    while (num != 0) {
+        oct += (num % 8) * digit;
+        num /= 8;
+        digit *= 10;
+    }
+
+    return oct;
 }

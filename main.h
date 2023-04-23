@@ -6,4 +6,6 @@
 int _printf(const char *format, ...);
 int switches(va_list args,char c, size_t *size);
 int count_chars(int num);
+int checkifoct(int num);
+int dec2oct(int num);
 char *inttostring(int x);

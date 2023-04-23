@@ -90,6 +90,8 @@ int switches(va_list args, char c, size_t *size)
 			break;
 		case 'i':
 			x = va_arg(args, int);
+			if (checkifoct(x))
+				x = dec2oct(x);
 			str = inttostring(x);
 			write(1, str, strlen(str));
 			*size += count_chars(x);
