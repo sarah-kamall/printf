@@ -10,6 +10,8 @@ int count_chars(int num)
 	int count;
 
 	count = 0;
+	if (num < 0)
+		count ++;
 	while (num != 0)
 	{
 		num /= 10;
