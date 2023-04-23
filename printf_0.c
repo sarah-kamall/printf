@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	int u;
 
-	if (!format)
+	if (!format || !(*format))
 		return (-1);
 	size = 0;
 	s = format;
