@@ -31,16 +31,7 @@ int _printf(const char *format, ...)
 					s++;
 				}
 				u = switches(args, *(s + 1), &size);
-				if (u == 2)
-					s += 2;
-				if (u == 1)
-					s += 1;
-				if (u == -10)
-				{
-					write(1, s, 1);
-					s++;
-					size += 1;
-				}
+				s += u;
 			}
 			else
 			{
@@ -67,56 +58,25 @@ int _printf(const char *format, ...)
  */
 int switches(va_list args, char c, size_t *size)
 {
-	char  *str;
-	int x;
-	int num;
+	int i;
 
-	switch (c)
+	mod_t mod[] = {
+		{'s', print_string},
+		{'c', print_char},
+		{'i', print_int},
+		{'d', print_int},
+		{'%', print_prec},
+		{'b', print_dec};
+		{'\0', NULL}
+	};
+	i = 0;
+	while (i < 6)
 	{
-		case 's':
-			str = va_arg(args, char *);
-			if (str)
-			{
-				write(1, str, strlen(str));
-				*size += strlen(str);
-				num =  2;
-			}
-			break;
-		case 'c':
-			x = va_arg(args, int);
-			write(1, &x, 1);
-			*size += 1;
-			num = 2;
-			break;
-		case 'i':
-			x = va_arg(args, int);
-			if (checkifoct(x))
-				x = dec2oct(x);
-			str = inttostring(x);
-			write(1, str, strlen(str));
-			*size += count_chars(x);
-			num = 2;
-			break;
-		case 'd':
-			x = va_arg(args, int);
-			str = inttostring(x);
-			write(1, str, strlen(str));
-			*size += count_chars(x);
-			num = 2;
-			break;
-		case '%':
-			x = '%';
-			write(1, &x, 1);
-			*size += 1;
-			num = 2;
-			break;
-		default:
-			x = '%';
-			write(1, &x, 1); 
-			write(1, &c, 1);
-			*size += 2;
-			num = 2;
-			break;
+		if (mod[i].mod == c)
+		{
+			return (mod[i].f(size, args));
+		}
+		i++;
 	}
-			return (num);
+	return (0);
 }
