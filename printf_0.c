@@ -56,6 +56,7 @@ int switches(va_list args, char c, size_t *size)
 {
 	char  *str;
 	int x;
+	int num;
 
 	switch (c)
 	{
@@ -65,30 +66,36 @@ int switches(va_list args, char c, size_t *size)
 			{
 				write(1, str, strlen(str));
 				*size += strlen(str);
-				return (2);
+				num =  2;
 			}
+			break;
 		case 'c':
 			x = va_arg(args, int);
 			write(1, &x, 1);
 			*size += 1;
-			return (2);
+			num = 2;
+			break;
 		case 'i':
 			x = va_arg(args, int);
 			str = inttostring(x);
 			write(1, str, strlen(str));
 			*size += count_chars(x);
-			return (2);
+			num = 2;
+			break;
 		case '%':
 			x = '%';
 			write(1, &x, 1);
 			*size += 1;
-			return (2);
+			num = 2;
+			break;
 		case ' ':
 			return (-10);
 		default:
+			write(1, "%", 1);
 			write(1, &c, 1);
 			*size += 1;
-			return (1);
+			num = 2;
+			break;
 	}
-	return (0);
+	return (num);
 }
