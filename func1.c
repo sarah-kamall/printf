@@ -9,7 +9,7 @@ int print_unsigned(size_t *size, va_list arg)
 	str = uninttostring(x);
 	write(1, str, strlen(str));
 	*size += count_chars(x);
-	return (0);
+	return (2);
 }
 int print_octal(size_t *size, va_list arg)
 {
@@ -44,16 +44,16 @@ int print_hexupp(size_t *size, va_list arg)
 	{
 		rem = decnum % 16;
 		if (rem < 10)
-        		rem = rem + 48;
+        		rem = rem + '0';
 		else
-			rem = rem + 55;
+			rem = rem + 'A';
 		hexnum[i] = rem;
 		i++;
 		decnum = decnum / 16;
 	}
 	for(i=i-1; i>=0; i--)
 	{
-		write(1, &hexnum[i], 1);
+		write(1,&hexnum[i] , 1);
 		*size +=1;
 	}
 	return (2);
@@ -71,9 +71,9 @@ int print_hexlow(size_t *size, va_list arg)
 	{
 		rem = decnum % 16;
 		if (rem < 10)
-        		rem = rem + 48;
+        		rem = rem + '0';
 		else
-			rem = rem + 87;
+			rem = rem + 'a';
 		hexnum[i] = rem;
 		i++;
 		decnum = decnum / 16;
