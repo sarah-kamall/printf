@@ -32,5 +32,9 @@ int print_char(size_t *size, va_list arg);
 int print_int(size_t *size, va_list arg);
 int print_prec(size_t *size, va_list arg);
 int print_dec(size_t *size, va_list arg);
-
+int print_unsigned(size_t *size, va_list arg);
+int print_octal(size_t *size, va_list arg);
+int print_hexupp(size_t *size, va_list  arg);
+int print_hexlow(size_t *size, va_list arg);
+char *uninttostring(unsigned int l);
 #endif

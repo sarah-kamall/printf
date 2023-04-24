@@ -67,10 +67,14 @@ int switches(va_list args, char c, size_t *size)
 		{'d', print_int},
 		{'%', print_prec},
 		{'b', print_dec},
+		{'u', print_unsigned},
+		{'o', print_octal},
+		{'x', print_hexlow},
+		{'X', print_hexupp},
 		{'\0', NULL}
 	};
 	i = 0;
-	while (i < 6)
+	while (i < 10)
 	{
 		if (mod[i].mod == c)
 		{
@@ -78,5 +82,5 @@ int switches(va_list args, char c, size_t *size)
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }

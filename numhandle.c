@@ -103,3 +103,33 @@ int dec2oct(int num)
 
     return oct;
 }
+
+char *uninttostring(unsigned int l)
+{
+	char *str;
+	int i;
+	int len;
+	int tmp;
+
+	len = 0;
+	tmp = l;
+	while (tmp != 0)
+	{
+		len++;
+		tmp /= 10;
+	}
+	str = malloc(len + 1);
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	str[len] = '\0';
+	i = len - 1;
+	while (l != 0)
+	{
+		str[i] = (l % 10) + '0';
+		l /= 10;
+		i--;
+	}
+	return (str);
+}
