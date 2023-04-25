@@ -74,7 +74,7 @@ int switches(va_list args, char c, size_t *size)
 		{'\0', NULL}
 	};
 	i = 0;
-	while (i < 10)
+	while (mod[i].mod != '\0')
 	{
 		if (mod[i].mod == c)
 		{

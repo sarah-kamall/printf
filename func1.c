@@ -1,87 +1,76 @@
 #include "main.h"
+/**
+ * convert_to_base - Convert unsigned int to given base
+ * @arg: va_list to find the desired argument
+ * @base: The base to convert the number to
+ * @size: to uincrement the size
+ *
+ * Return: A string representing the converted number
+ */
+char *convert_to_base(va_list arg, size_t *size, unsigned int base)
+{
+	unsigned int num;
+	static char representation[] = "0123456789ABCDEF";
+	static char buffer [50];
+	char *ptr;
 
+	num = va_arg(arg, unsigned int);
+	if (base < 2 || base > 16)
+		return (NULL);
+
+	ptr = &buffer[49];
+	*ptr = '\0';
+	do
+	{
+		*(--ptr) = representation[num % base];
+		num /= base;
+		(*size)++;
+	}while (num != 0);
+
+	return (ptr);
+}
 int print_unsigned(size_t *size, va_list arg)
 {
-	int x;
-	char *str;
+	char *s;
 
-	x = va_arg(arg, unsigned int);
-	str = uninttostring(x);
-	write(1, str, strlen(str));
-	*size += count_chars(x);
+	s = convert_to_base(arg, size, 10);
+	write(1, s, strlen(s));
 	return (2);
 }
 int print_octal(size_t *size, va_list arg)
 {
-	int octal;
-	int i;
-	int decimal;
-	char *str;
+	char *s;
 
-	octal = 0;
-	i = 0;
-	decimal = va_arg(arg, unsigned int);
-	while (decimal != 0)
-	{
-		octal += (decimal % 8) * i;
-		decimal /= 8;
-		i *= 10;
-	}
-	str = uninttostring(octal);
-	write(1, str, strlen(str));
-	*size += count_chars(octal);
+	s = convert_to_base(arg, size, 8);
+	write(1, s, strlen(s));
 	return (2);
 }
 int print_hexupp(size_t *size, va_list arg)
 {
-	int rem, i;
-	char hexnum[50];
-	int decnum;
+	char *s;
 
-	decnum = va_arg(arg, unsigned int);
-	i = 0;
-	while (decnum != 0)
-	{
-		rem = decnum % 16;
-		if (rem < 10)
-        		rem = rem + '0';
-		else
-			rem = rem + 'A';
-		hexnum[i] = rem;
-		i++;
-		decnum = decnum / 16;
-	}
-	for(i=i-1; i>=0; i--)
-	{
-		write(1,&hexnum[i] , 1);
-		*size +=1;
-	}
-	return (2);
+	s = convert_to_base(arg, size, 16);
+	write(1, s, strlen(s));
+	return(2);
 }
+void str_to_lower(char *str) 
+{
+	int i;
+
+	int len = strlen(str);
+        for (i = 0; i < len; i++) 
+	{
+        	str[i] = tolower(str[i]);
+        }
+}
+
 int print_hexlow(size_t *size, va_list arg)
 {
+	char *s;
 
-	int rem, i;
-	char hexnum[50];
-	int decnum;
-
-	decnum = va_arg(arg, unsigned int);
-	i = 0;
-	while (decnum != 0)
-	{
-		rem = decnum % 16;
-		if (rem < 10)
-        		rem = rem + '0';
-		else
-			rem = rem + 'a';
-		hexnum[i] = rem;
-		i++;
-		decnum = decnum / 16;
-	}
-	for(i=i-1; i>=0; i--)
-	{
-		write(1, &hexnum[i], 1);
-		*size +=1;
-	}
+	s = convert_to_base(arg, size, 16);
+	str_to_lower(s);
+	write(1, s, strlen(s));
 	return (2);
 }
+
