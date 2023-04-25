@@ -22,36 +22,32 @@ int print_hexlow(size_t *size, va_list arg)
 }
 int print_mod_string(size_t *size, va_list arg)
 {
-	int num;
-	char *str;
+	char *str, *hexptr;
+	static char pf[]  = "\\x";
+	int i;
 
 	str = va_arg(arg, char *);
-	while (str)
+	while (*str)
 	{
 		if (((*str > 0) && (*str < 32)) || (*str >= 127))
 		{
-			int i;
-			static char pf[]  = "\x";
-			char *hex;
-
 			i = *str;
 			write(1, pf, 2);
 			*size += 2;
-			hex = conv_bas(i, 16);
-			write(1, hex, 2);
+			hexptr = conv_bas(i, 16, 2);
+			write(1, hexptr, 2);
 			*size += count_chars(i);
 		}
 		else
 		{
-		write(1, str, strlen(str));
-		*size += strlen(str);
-		num =  2;
+		write(1, str, 1);
+		*size += 1;
 		}
 		str++;
 	}
-	return (num);
+	return (2);
 }
-char *conv_bas(int num, int base)
+char *conv_bas(int num, int base, int precision)
 {
 	static char representation[] = "0123456789ABCDEF";
 	static char buffer [50];
@@ -66,9 +62,12 @@ char *conv_bas(int num, int base)
 	{
 		*(--ptr) = representation[num % base];
 		num /= base;
-		(*size)++;
+		precision--;
 	}while (num != 0);
-
+	while (precision > 0)
+	{
+		*(--ptr) = '0';
+		precision--;
+	}
 	return (ptr);
-}
 }
