@@ -59,8 +59,9 @@ int print_ptr(size_t *size, va_list arg)
 	{
 		s = malloc(strlen("(nil)") + 1);
 		if (!s)
-			return (-1);
+			return (1);
 		s = "(nil)\0";
+		*size += strlen(s);
 		write(1, s, strlen(s));
 		return (2);
 	}
@@ -70,7 +71,10 @@ int print_ptr(size_t *size, va_list arg)
 	zx[0] = '0';
 	zx[1] = 'x';
 	write(1, zx, 2);
+	str_to_lower(s);
 	write(1, s, strlen(s));
+	*size += (strlen(s) + 2);
+	return (2);
 }
 char *conv_bas(int num, int base, int precision)
 {
