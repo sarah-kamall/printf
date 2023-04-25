@@ -66,7 +66,7 @@ int switches(va_list args, char c, size_t *size)
 		{'i', print_int},
 		{'d', print_int},
 		{'%', print_prec},
-		{'b', print_dec},
+		{'b', print_binary},
 		{'u', print_unsigned},
 		{'o', print_octal},
 		{'x', print_hexlow},

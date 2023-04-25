@@ -29,6 +29,14 @@ char *convert_to_base(va_list arg, size_t *size, unsigned int base)
 
 	return (ptr);
 }
+int print_binary(size_t *size, va_list arg)
+{
+	char *s;
+
+	s = convert_to_base(arg, size, 2);
+	write(1, s, strlen(s));
+	return (2);
+}
 int print_unsigned(size_t *size, va_list arg)
 {
 	char *s;
