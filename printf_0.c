@@ -71,6 +71,7 @@ int switches(va_list args, char c, size_t *size)
 		{'o', print_octal},
 		{'x', print_hexlow},
 		{'X', print_hexupp},
+		{'S', print_mod_string},
 		{'\0', NULL}
 	};
 	i = 0;

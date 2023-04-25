@@ -22,9 +22,11 @@ typedef struct mod
 
 int _printf(const char *format, ...);
 int switches(va_list args,char c, size_t *size);
+
 int count_chars(int num);
 int checkifoct(int num);
 int dec2oct(int num);
+
 char *inttostring(int x);
 int print_string(size_t *size, va_list arg);
 int print_binary(size_t *size, va_list arg);
@@ -36,5 +38,9 @@ int print_unsigned(size_t *size, va_list arg);
 int print_octal(size_t *size, va_list arg);
 int print_hexupp(size_t *size, va_list  arg);
 int print_hexlow(size_t *size, va_list arg);
+int print_mod_string(size_t *size, va_list arg);
+
 char *uninttostring(unsigned int l);
+char *convert_to_base(va_list arg, size_t *size, unsigned int base);
+void str_to_lower(char *str);
 #endif

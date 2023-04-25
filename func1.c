@@ -61,24 +61,4 @@ int print_hexupp(size_t *size, va_list arg)
 	write(1, s, strlen(s));
 	return(2);
 }
-void str_to_lower(char *str) 
-{
-	int i;
-
-	int len = strlen(str);
-        for (i = 0; i < len; i++) 
-	{
-        	str[i] = tolower(str[i]);
-        }
-}
-
-int print_hexlow(size_t *size, va_list arg)
-{
-	char *s;
-
-	s = convert_to_base(arg, size, 16);
-	str_to_lower(s);
-	write(1, s, strlen(s));
-	return (2);
-}
 
