@@ -40,7 +40,9 @@ int print_hexupp(size_t *size, va_list  arg);
 int print_hexlow(size_t *size, va_list arg);
 int print_mod_string(size_t *size, va_list arg);
 
+int count_chars(int num);
 char *uninttostring(unsigned int l);
 char *convert_to_base(va_list arg, size_t *size, unsigned int base);
 void str_to_lower(char *str);
+char *conv_bas(int num, int base);
 #endif
