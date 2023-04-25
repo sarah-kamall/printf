@@ -27,6 +27,7 @@ int checkifoct(int num);
 int dec2oct(int num);
 char *inttostring(int x);
 int print_string(size_t *size, va_list arg);
+int print_binary(size_t *size, va_list arg);
 int print_char(size_t *size, va_list arg);
 int print_int(size_t *size, va_list arg);
 int print_prec(size_t *size, va_list arg);
