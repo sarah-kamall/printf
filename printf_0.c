@@ -63,6 +63,7 @@ int switches(va_list args, char c, size_t *size)
 	mod_t mod[] = {
 		{'s', print_string},
 		{'c', print_char},
+		{'p', print_ptr},
 		{'i', print_int},
 		{'d', print_int},
 		{'%', print_prec},

@@ -47,6 +47,31 @@ int print_mod_string(size_t *size, va_list arg)
 	}
 	return (2);
 }
+int print_ptr(size_t *size, va_list arg)
+{
+	intptr_t p;
+	void *ptr;
+	char *s, zx[2];
+	long unsigned int i;
+
+	ptr = va_arg(arg, void *);
+	if (ptr == NULL)
+	{
+		s = malloc(strlen("(nil)") + 1);
+		if (!s)
+			return (-1);
+		s = "(nil)\0";
+		write(1, s, strlen(s));
+		return (2);
+	}
+	p = (intptr_t) ptr;
+	i = p;
+	s = conv_bas(i, 16, 0);
+	zx[0] = '0';
+	zx[1] = 'x';
+	write(1, zx, 2);
+	write(1, s, strlen(s));
+}
 char *conv_bas(int num, int base, int precision)
 {
 	static char representation[] = "0123456789ABCDEF";
